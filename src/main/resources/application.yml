@@ -1,0 +1,35 @@
+date:
+  media:
+    max-width: 640
+    max-height: 320
+  data:
+    url: /data
+spring:
+  profiles:
+    active: prod
+  application:
+    name: auth-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/auth_service
+    username: auth
+    password: 1234
+server:
+  port: ${PORT:9200}
+eureka:
+  instance:
+    hostname: localhost
+    metadataMap:
+      zone: zone1      
+logging:
+  level:
+    org:
+      springframework: info
+    hibernate:
+      SQL: debug
+    com: debug
