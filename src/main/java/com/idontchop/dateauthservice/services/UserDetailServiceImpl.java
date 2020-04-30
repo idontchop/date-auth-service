@@ -39,7 +39,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		
 		User user = userOptional.get();
 		UserPrincipal userPrincipal = new UserPrincipal ( user.getName(),
-						user.getPassword(),
+						user.getUserSecurity().getPassword(),
 				AuthorityUtils.createAuthorityList("USER"));
 		
 		userPrincipal.setUser(user);

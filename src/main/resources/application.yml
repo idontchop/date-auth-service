@@ -1,7 +1,8 @@
 date:
-  media:
-    max-width: 640
-    max-height: 320
+  auth:
+    expiration-time: 24
+    signing-key: SecretyKey1
+    prefix: Bearer
   data:
     url: /data
 spring:

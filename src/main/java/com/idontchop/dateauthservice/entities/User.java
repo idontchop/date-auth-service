@@ -14,7 +14,9 @@ public class User {
 	
 	private String name;
 	
-	private String password;
+	private String email;
+	
+	private UserSecurity userSecurity;
 
 	public long getId() {
 		return id;
@@ -32,12 +34,20 @@ public class User {
 		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public UserSecurity getUserSecurity() {
+		return userSecurity;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUserSecurity(UserSecurity userSecurity) {
+		this.userSecurity = userSecurity;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
