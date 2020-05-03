@@ -2,6 +2,8 @@ package com.idontchop.dateauthservice.dtos;
 
 import javax.validation.constraints.NotBlank;
 
+import com.idontchop.dateauthservice.entities.User;
+
 public class UserDto {
 	
 	@NotBlank
@@ -11,6 +13,13 @@ public class UserDto {
 	private String email;
 	
 	private String token;
+	
+	public UserDto() {}
+	
+	public UserDto( User user ) {
+		this.name = user.getName();
+		this.email = user.getEmail();
+	}
 
 	public String getName() {
 		return name;
@@ -32,8 +41,9 @@ public class UserDto {
 		return token;
 	}
 
-	public void setToken(String token) {
+	public UserDto setToken(String token) {
 		this.token = token;
+		return this;
 	}
 	
 	

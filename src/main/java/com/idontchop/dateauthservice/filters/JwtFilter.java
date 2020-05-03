@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.filter.GenericFilterBean;
@@ -36,7 +39,17 @@ public class JwtFilter extends GenericFilterBean {
 		String username = jwtService.getAuthentication((HttpServletRequest) request);
 		
 		if ( username != null ) {
-			
+			try {
+				
+				UsernamePasswordAuthenticationToken auth =
+						new UsernamePasswordAuthenticationToken
+						( username, null, AuthorityUtils.createAuthorityList("USER") );
+				
+				SecurityContextHolder.getContext().setAuthentication(auth);
+				
+			} catch (Exception e) {
+				logger.debug ("Service load user: " + e.getMessage());
+			}
 		}
 		
 		

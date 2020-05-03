@@ -32,5 +32,19 @@ public class UserService {
 		return new User().userFromDto(userDto);
 		
 	}
+	
+	/**
+	 * Adds token to dto, returns the dto.
+	 * 
+	 * @param userDto
+	 * @return
+	 */
+	public UserDto addToken ( UserDto userDto ) {
+		
+		String token = jwtService.buildToken(userDto.getName());
+		userDto.setToken(token);
+		return userDto;
+		
+	}
 
 }

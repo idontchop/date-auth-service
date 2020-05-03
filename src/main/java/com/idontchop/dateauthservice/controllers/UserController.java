@@ -28,9 +28,14 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	
+	
 	@PostMapping ("/new")
 	public UserDto newUser(@RequestBody @Valid UserDto userDto) {
-		return userDto;
+		UserDto newUserDto = new UserDto(userService.newUserFromDto(userDto));
+		
+		return userService.addToken(newUserDto);
+		
 	}
 	
 	/**
