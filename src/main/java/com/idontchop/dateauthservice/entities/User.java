@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.idontchop.dateauthservice.dtos.UserDto;
 
 @Entity
 public class User {
@@ -16,7 +19,22 @@ public class User {
 	
 	private String email;
 	
+	@OneToOne
 	private UserSecurity userSecurity;
+	
+	public User (String name) {
+		this.name = name;
+	}
+	
+	public User () {}
+	
+	public User userFromDto ( UserDto userDto ) {
+		
+		this.name = userDto.getName();
+		this.email = userDto.getEmail();
+		return this;
+		
+	}
 
 	public long getId() {
 		return id;

@@ -22,11 +22,8 @@ class DateAuthServiceApplicationTests {
 	@Test
 	void createDb() {
 		
-		User user = new User();
-		
-		user.setName("Nate");
-		user.setPassword("1234");
-		
+		User user = userRepository.findByName("Nate").orElse( new User("Nate") );
+					
 		userRepository.save(user);
 		
 		assertTrue ( userRepository.findByName("Nate").isPresent());

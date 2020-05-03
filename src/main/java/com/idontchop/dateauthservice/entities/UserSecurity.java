@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Specifies which Security Provider and holds data specific to it.
@@ -24,6 +25,7 @@ public class UserSecurity {
 	private String password;	
 	private String email;
 	
+	@ManyToOne
 	private SecurityProvider securityProvider;
 
 	public long getId() {

@@ -28,6 +28,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@PostMapping ("/new")
+	public UserDto newUser(@RequestBody @Valid UserDto userDto) {
+		return userDto;
+	}
+	
 	/**
 	 * Exposes limited user information from the Principal.
 	 * 
