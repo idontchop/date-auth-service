@@ -1,5 +1,7 @@
 package com.idontchop.dateauthservice.controllers;
 
+import java.util.NoSuchElementException;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,11 +32,16 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@PostMapping ("/login")
+	public UserDto loginUser(@RequestBody @Valid UserDto userDto) {
+		return userService.loginForm(userDto);
+	}
 	
 	
 	@PostMapping ("/new")
 	public UserDto newUser(@RequestBody @Valid UserDto userDto) {
-		UserDto newUserDto = new UserDto(userService.newUserFromDto(userDto));
+		
+		UserDto newUserDto = new UserDto(userService.newFormUserFromDto(userDto));
 		
 		return userService.addToken(newUserDto);
 		
@@ -61,6 +70,17 @@ public class UserController {
 		return SecurityContextHolder.getContext().getAuthentication();
 	}
 	
+	@ExceptionHandler({NoSuchElementException.class})
+	@ResponseStatus( code = HttpStatus.NOT_FOUND)
+	public RestMessage userNotFound() {
+		return RestMessage.build("user/password not found");
+	}
+	
+	@ExceptionHandler({IllegalArgumentException.class})
+	@ResponseStatus( code = HttpStatus.CONFLICT )
+	public RestMessage illegal(IllegalArgumentException ex) {
+		return RestMessage.build(ex.getMessage());
+	}
 	/*
 	@GetMapping( "/me/profile" )
 	public UserProfile myUserProfile ( @AuthenticationPrincipal UserPrincipal up ) {

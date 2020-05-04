@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.idontchop.dateauthservice.config.UserPrincipal;
+import com.idontchop.dateauthservice.entities.SecurityProvider;
 import com.idontchop.dateauthservice.entities.User;
 import com.idontchop.dateauthservice.repositories.UserRepository;
 
@@ -33,13 +34,20 @@ public class UserDetailServiceImpl implements UserDetailsService {
 		
 		Optional<User> userOptional = userRepository.findByName ( username );
 					
+		// check user exists
 		if ( !userOptional.isPresent() ) {
 			throw new UsernameNotFoundException(username + " not found");
 		}
-		
+
 		User user = userOptional.get();
+		
+		// check user has form login
+		if ( ! user.getAuthTypes().contains(SecurityProvider.Provider.FORM) ) {
+			throw new UsernameNotFoundException(username + " form auth not found.");
+		}
+		
 		UserPrincipal userPrincipal = new UserPrincipal ( user.getName(),
-						user.getUserSecurity().getPassword(),
+						"",
 				AuthorityUtils.createAuthorityList("USER"));
 		
 		userPrincipal.setUser(user);

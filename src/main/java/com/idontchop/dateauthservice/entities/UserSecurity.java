@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Specifies which Security Provider and holds data specific to it.
@@ -20,13 +22,29 @@ public class UserSecurity {
 	@Id
 	@GeneratedValue ( strategy = GenerationType.IDENTITY)
 	private long id;
-	
+		
 	// fields which might be null depending on provider
 	private String password;	
 	private String email;
 	
 	@ManyToOne
 	private SecurityProvider securityProvider;
+	
+	public UserSecurity() {}
+
+	public UserSecurity(SecurityProvider sp) {
+		this.securityProvider = sp;
+	}
+	
+	public UserSecurity pw(String pw) {
+		this.password = pw;
+		return this;
+	}
+	
+	public UserSecurity login(String login) {
+		this.email = login;
+		return this;
+	}
 
 	public long getId() {
 		return id;
@@ -59,7 +77,8 @@ public class UserSecurity {
 	public void setSecurityProvider(SecurityProvider securityProvider) {
 		this.securityProvider = securityProvider;
 	}
-	
-	
 
+	public boolean isAuthType( SecurityProvider.Provider type ) {
+		return securityProvider.getName() == type;
+	}
 }

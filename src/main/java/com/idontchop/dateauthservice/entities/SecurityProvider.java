@@ -1,10 +1,13 @@
 package com.idontchop.dateauthservice.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Sets up an identity for SSO providers.
@@ -19,8 +22,14 @@ public class SecurityProvider {
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotBlank
-	private String name;   // facebook, form...
+	public enum Provider {
+		FORM,
+		FACEBOOK
+	}
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private Provider name;   // facebook, form...
 
 	public long getId() {
 		return id;
@@ -30,15 +39,13 @@ public class SecurityProvider {
 		this.id = id;
 	}
 
-	public String getName() {
+	public Provider getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(Provider name) {
 		this.name = name;
-	}
-	
-	
-	
+	}	
 
+	
 }

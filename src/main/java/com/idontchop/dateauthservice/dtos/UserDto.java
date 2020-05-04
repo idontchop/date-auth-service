@@ -12,13 +12,15 @@ public class UserDto {
 	@NotBlank
 	private String email;
 	
+	@NotBlank
+	private String password;
+	
 	private String token;
 	
 	public UserDto() {}
 	
 	public UserDto( User user ) {
 		this.name = user.getName();
-		this.email = user.getEmail();
 	}
 
 	public String getName() {
@@ -44,6 +46,14 @@ public class UserDto {
 	public UserDto setToken(String token) {
 		this.token = token;
 		return this;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	
