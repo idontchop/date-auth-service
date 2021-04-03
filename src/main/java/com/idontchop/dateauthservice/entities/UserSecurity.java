@@ -25,7 +25,7 @@ public class UserSecurity {
 		
 	// fields which might be null depending on provider
 	private String password;	
-	private String email;
+	private String email;		// email may not be email with some providers
 	
 	@ManyToOne
 	private SecurityProvider securityProvider;

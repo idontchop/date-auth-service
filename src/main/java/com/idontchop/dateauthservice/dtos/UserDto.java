@@ -3,10 +3,10 @@ package com.idontchop.dateauthservice.dtos;
 import javax.validation.constraints.NotBlank;
 
 import com.idontchop.dateauthservice.entities.User;
+import com.idontchop.dateauthservice.entities.SecurityProvider.Provider;
 
 public class UserDto {
 	
-	@NotBlank
 	private String name;
 	
 	@NotBlank
@@ -21,6 +21,7 @@ public class UserDto {
 	
 	public UserDto( User user ) {
 		this.name = user.getName();
+		this.email = user.getEmail();
 	}
 
 	public String getName() {

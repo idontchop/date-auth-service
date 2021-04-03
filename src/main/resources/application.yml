@@ -1,7 +1,7 @@
 date:
   auth:
-    expiration-time: 24
-    signing-key: SecretyKey1
+    expiration-time: 2400
+    signing-key: SecretKey1
     prefix: Bearer
   data:
     url: /data

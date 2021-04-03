@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.idontchop.dateauthservice.dtos.UserDto;
+import com.idontchop.dateauthservice.entities.SecurityProvider.Provider;
 
 @Entity
 public class User {
@@ -75,6 +76,32 @@ public class User {
 		while ( userSecurity.size() > 0 ) {
 			userSecurity.remove(0);
 		}
+	}
+	
+	/**
+	 * searches user security for proper security provider
+	 * @return
+	 */
+	public String getEmail(Provider provider) {
+		
+		return userSecurity.stream()
+					.filter( us -> us.isAuthType(provider))
+					.findFirst()
+					.orElseThrow()
+					.getEmail();
+	}
+	
+	/**
+	 * When getemail without argument is called, will default to form
+	 * @return
+	 */
+	public String getEmail() {
+		if ( getAuthTypes().contains(Provider.FORM))
+			return getEmail(Provider.FORM);
+		else if (getAuthTypes().size() > 0 )
+			return getEmail(getAuthTypes().get(0));
+		else return null;	// user has no security provider !?!			
+					
 	}
 
 	@JsonIgnore

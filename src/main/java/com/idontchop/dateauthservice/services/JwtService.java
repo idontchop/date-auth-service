@@ -40,10 +40,10 @@ public class JwtService {
 	public String buildToken ( String name ) {
 		
 		LocalDateTime ldt = LocalDateTime.now();
-		ldt.plusHours( Integer.parseInt(EXPIRATIONTIME) );
+		ldt = ldt.plusHours( Integer.parseInt(EXPIRATIONTIME) );
 		
 		return Jwts.builder().setSubject(name)		
-			.setExpiration( Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant() ) )
+			.setExpiration( Date.from( ldt.atZone( ZoneId.systemDefault() ).toInstant()  ))
 			.signWith(SignatureAlgorithm.HS512, SIGNINGKEY)
 			.compact();
 	}

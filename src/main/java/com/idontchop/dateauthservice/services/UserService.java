@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.idontchop.dateauthservice.dtos.UserDto;
 import com.idontchop.dateauthservice.entities.SecurityProvider;
+import com.idontchop.dateauthservice.entities.SecurityProvider.Provider;
 import com.idontchop.dateauthservice.entities.User;
 import com.idontchop.dateauthservice.entities.UserSecurity;
 import com.idontchop.dateauthservice.repositories.SecurityProviderRepository;
@@ -107,9 +108,9 @@ public class UserService {
 		String username = userDto.getEmail();
 		String password = userDto.getPassword();
 		
-		SecurityProvider sp = securityProviderRepository.findByName(SecurityProvider.Provider.FORM)
+		SecurityProvider sp = securityProviderRepository.findByName(Provider.FORM)
 				.orElseThrow();
-		
+
 		// will throw nosuchelement if user not found
 		User user = userRepository.findFormUser(username, sp)
 				.orElseThrow();
