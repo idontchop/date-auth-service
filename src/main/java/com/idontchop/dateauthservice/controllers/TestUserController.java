@@ -20,7 +20,7 @@ public class TestUserController {
 	public RestMessage getTokenForTestUser(@PathVariable String access) {
 		
 		try {
-			return RestMessage.build( testUserService.retrieveToken(access) );
+			return new RestMessage().add( "token", testUserService.retrieveToken(access));
 		} catch (NoSuchElementException ex) {
 			return RestMessage.build("Access Code Not Found");
 		}
