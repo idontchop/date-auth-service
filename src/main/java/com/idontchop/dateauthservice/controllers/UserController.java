@@ -58,7 +58,6 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping("/user")
-	@PreAuthorize ("hasRole('USER')")
 	public RestMessage userEndpoint ( @AuthenticationPrincipal UserPrincipal up ) {
 		
 		return RestMessage.build("hello")

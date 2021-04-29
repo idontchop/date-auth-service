@@ -5,9 +5,11 @@ import java.net.SocketException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.idontchop.dateauthservice.dtos.RestMessage;
 
+@RestController
 public class MainController {
 	
 	@Value ("${server.port}")
