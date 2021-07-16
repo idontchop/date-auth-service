@@ -17,7 +17,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/auth_service
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/auth_service?serverTimezone=UTC
     username: auth
     password: 1234
 server:
