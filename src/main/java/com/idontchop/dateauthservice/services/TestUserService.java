@@ -23,5 +23,14 @@ public class TestUserService {
 				.getUsername());
 					
 	}
+	
+	public String addTestUser (String username, String accessCode) {
+		
+		TestUser newTestUser = new TestUser(username, accessCode);
+		
+		testUserRepository.save(newTestUser);
+		
+		return retrieveToken(newTestUser.getAccessCode());
+	}
 
 }

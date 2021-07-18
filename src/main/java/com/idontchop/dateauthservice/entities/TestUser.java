@@ -22,6 +22,11 @@ public class TestUser {
 	private String username;
 	
 	private String accessCode;
+	
+	public TestUser( String username, String accessCode) {
+		this.username = username;
+		this.accessCode = accessCode;
+	}
 
 	public long getId() {
 		return id;
