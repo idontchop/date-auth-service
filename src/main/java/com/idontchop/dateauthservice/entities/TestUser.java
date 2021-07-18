@@ -28,6 +28,10 @@ public class TestUser {
 		this.username = username;
 		this.accessCode = accessCode;
 	}
+	
+	public String getName() {
+		return username;
+	}
 
 	public long getId() {
 		return id;

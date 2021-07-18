@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.idontchop.dateauthservice.entities.TestUser;
 import com.idontchop.dateauthservice.repositories.TestUserRepository;
+import com.lovemire.messageLibrary.config.enums.LoveMireEvents;
 
 @Service
 public class TestUserService {
@@ -14,6 +15,9 @@ public class TestUserService {
 	
 	@Autowired
 	JwtService jwtService;
+	
+	@Autowired
+	MessageService messageService;
 	
 	public String retrieveToken (String accessCode) {
 		
@@ -29,6 +33,8 @@ public class TestUserService {
 		TestUser newTestUser = new TestUser(username, accessCode);
 		
 		testUserRepository.save(newTestUser);
+		
+		messageService.sendAccountEvent(LoveMireEvents.ACCOUNT_CREATED, newTestUser);
 		
 		return retrieveToken(newTestUser.getAccessCode());
 	}
