@@ -23,6 +23,7 @@ public class TestUser {
 	
 	private String accessCode;
 	
+	public TestUser() {}
 	public TestUser( String username, String accessCode) {
 		this.username = username;
 		this.accessCode = accessCode;
