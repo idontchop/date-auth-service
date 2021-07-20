@@ -9,4 +9,5 @@ import com.idontchop.dateauthservice.entities.TestUser;
 public interface TestUserRepository extends CrudRepository<TestUser, Long> {
 
 	public Optional<TestUser> findByAccessCode(String accessCode);
+	public Optional<TestUser> findByUsername(String username);
 }

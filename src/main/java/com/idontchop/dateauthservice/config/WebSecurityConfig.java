@@ -24,6 +24,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.idontchop.dateauthservice.filters.JwtFilter;
 import com.idontchop.dateauthservice.services.UserDetailServiceImpl;
 
+import config.LoveMireWebConfig;
+
 
 
 @Configuration
@@ -69,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() 
     {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000","http://localhost","https://idontchop.com","https://www.idontchop.com"));
+        configuration.setAllowedOrigins(LoveMireWebConfig.CORSCONFIG);
         configuration.setAllowedMethods(Arrays.asList("GET","POST","PUT","DELETE","PATCH","OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);

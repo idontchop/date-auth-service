@@ -30,10 +30,13 @@ public class TestUserService {
 	
 	public String addTestUser (String username, String accessCode) {
 		
-		TestUser newTestUser = new TestUser(username, accessCode);
+		TestUser newTestUser = testUserRepository.findByUsername(username)
+				.orElse(new TestUser(username, accessCode));
 		
+		newTestUser.setAccessCode(accessCode);
 		testUserRepository.save(newTestUser);
 		
+		// TODO: Works for testing purposes but shouldn't send message if not saved
 		messageService.sendAccountEvent(LoveMireEvents.ACCOUNT_CREATED, newTestUser);
 		
 		return retrieveToken(newTestUser.getAccessCode());

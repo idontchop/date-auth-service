@@ -32,7 +32,7 @@ public class TestUserController {
 		try {
 			return new RestMessage().add( "token", testUserService.addTestUser(username, access));
 		} catch (Exception e) {
-			return RestMessage.build("Unable to Add User");
+			return RestMessage.build("Unable to Add User" + e.getLocalizedMessage());
 		}
 	}
 	
